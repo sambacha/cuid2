@@ -5,14 +5,14 @@ const info = (txt) => console.log(`# - ${txt}`);
 const idToBigInt = (id, _, __, radix = 36) =>
   [...id.toString()].reduce(
     (r, v) => r * BigInt(radix) + BigInt(parseInt(v, radix)),
-    0n
+    0n,
   );
 
 const buildHistogram = (numbers, bucketCount = 20) => {
   const buckets = Array(bucketCount).fill(0);
   let counter = 1;
   const bucketLength = Math.ceil(
-    Number(BigInt(36 ** 23) / BigInt(bucketCount))
+    Number(BigInt(36 ** 23) / BigInt(bucketCount)),
   );
 
   for (const number of numbers) {
