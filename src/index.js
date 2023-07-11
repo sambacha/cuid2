@@ -1,10 +1,11 @@
 /* global global, window, module */
 const { sha3_512: sha3 } = require("@noble/hashes/sha3");
+const { ceil, random } = Math;
 
 const defaultLength = 24;
 const bigLength = 32;
 
-const createEntropy = (length = 4, random = Math.random) => {
+const createEntropy = (length = 4, random = (0, random())) => {
   let entropy = "";
 
   while (entropy.length < length) {
@@ -17,9 +18,11 @@ const createEntropy = (length = 4, random = Math.random) => {
  * Adapted from https://github.com/juanelas/bigint-conversion
  * MIT License Copyright (c) 2018 Juan Hernández Serrano
  */
+
 function bufToBigInt(buf) {
   let bits = 8n;
-
+  if (ArrayBuffer.isView(buf)) bits = BigInt(buf.BYTES_PER_ELEMENT * 8);
+  else buf = new Uint8Array(buf);
   let value = 0n;
   for (const i of buf.values()) {
     const bi = BigInt(i);
@@ -35,7 +38,7 @@ const hash = (input = "") => {
 };
 
 const alphabet = Array.from({ length: 26 }, (x, i) =>
-  String.fromCharCode(i + 97)
+  String.fromCharCode(i + 97),
 );
 
 const randomLetter = (random) =>

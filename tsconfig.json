@@ -14,8 +14,8 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
+    "esModuleInterop": false,
+    "resolveJsonModule": false,
     "isolatedModules": true,
     "jsx": "preserve"
   },
